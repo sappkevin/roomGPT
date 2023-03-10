@@ -8,7 +8,7 @@ const testimonials = [
       author: {
         name: "Melissa Ford",
         role: "Engineer & Author",
-        image: "/mel.jpg",
+        image: "/mel.png",
       },
     }
   ],
