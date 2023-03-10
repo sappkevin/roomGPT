@@ -8,7 +8,7 @@ module.exports = {
     return [
       {
         source: "/github",
-        destination: "https://github.com/Nutlope/roomGPT",
+        destination: "https://github.com/sappkevin/roomGPT",
         permanent: false,
       },
       {
