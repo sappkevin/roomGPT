@@ -3,11 +3,11 @@
 - test it on deployment URL, make sure reset time is real
 - roll it out to prod with instant rollback
 
-# [roomGPT.io](https://roomGPT.io)
+# [cozyspotai.com](https://cozyspotai.com)
 
 This project generates new designs of your room with AI.
 
-[![Room GPT](./public/screenshot.png)](https://roomGPT.io)
+[![Room GPT](./public/screenshot.png)](https://cozyspotai.com)
 
 ## How it works
 
