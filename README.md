@@ -6,6 +6,28 @@
 - test it on deployment URL, make sure reset time is real
 - roll it out to prod with instant rollback
 
+## Todos for UI
+- Create pipeline to auto generate Sample photos on main screen using Google image bucket or Amazon S3 storage
+- Create a pipeline to auto generate testimonials using AI profile pic (Dreambooth) and ChatGPT/ChatSonic prompts
+- Create a cleaner looking NextJS UI 
+- Add Public Gallery view
+- Give user default option of public view
+- Create Pricing page
+- Add Microsoft, Facebook, and Apple Login options
+- Create TOS documentation
+- Create FAQ documentation
+- Create About documentation
+
+## Todos for backend
+- Simplify the limit feature
+- Add DB column for public and private photo sharing for Photo Gallery view
+- Add support for Stripe, Patreon, buy me coffee payments
+
+## Feature Ideas
+- Create Discord server and bot for generating designs via Discord
+- Add ability to email photos or add them to personal Google/iCloud/OneDrive Drive storage
+
+
 This project generates new designs of your room with AI.
 
 [![Room GPT](./public/screenshot.png)](https://cozyspotai.com)
