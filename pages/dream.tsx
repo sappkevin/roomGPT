@@ -117,19 +117,11 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>RoomGPT</title>
+        <title>Cozyspotai</title>
       </Head>
       <Header photo={session?.user?.image || undefined} />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 sm:mb-0 mb-8">
-        <a
-          href="https://twitter.com/nutlope/status/1633529333565251595"
-          target="_blank"
-          rel="noreferrer"
-          className="border border-gray-700 rounded-2xl py-2 px-4 text-gray-400 text-sm my-6 duration-300 ease-in-out hover:text-gray-300 transition"
-        >
-          <span className="font-semibold">728,000 rooms</span> generated and
-          counting
-        </a>
+       
         <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-100 sm:text-6xl mb-5">
           Generate your <span className="text-blue-600">dream</span> room
         </h1>

@@ -1,8 +1,14 @@
-# [roomGPT.io](https://roomGPT.io)
+
+# [cozyspotai.com](https://cozyspotai.com)
+=======
+## Todos left for auth
+
+- test it on deployment URL, make sure reset time is real
+- roll it out to prod with instant rollback
 
 This project generates new designs of your room with AI.
 
-[![Room GPT](./public/screenshot.png)](https://roomGPT.io)
+[![Room GPT](./public/screenshot.png)](https://cozyspotai.com)
 
 ## How it works
 
@@ -13,7 +19,7 @@ It uses an ML model called [ControlNet](https://github.com/lllyasviel/ControlNet
 ### Cloning the repository the local machine.
 
 ```bash
-git clone https://github.com/Nutlope/roomGPT
+git clone https://github.com/sappkevin/roomGPT
 ```
 
 ### Creating a account on Replicate to get an API key.
@@ -52,9 +58,3 @@ npm run dev
 6. Publish app
 7. Create credentials -> Oauth client ID
 8. Run npx prisma db push && prisma migrate dev && prisma generate
-
-## One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Nutlope/roomGPT&env=REPLICATE_API_KEY&project-name=room-GPT&repo-name=roomGPT)
