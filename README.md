@@ -1,6 +1,6 @@
 
 # [cozyspotai.com](https://cozyspotai.com)
-=======
+
 ## Todos left for auth
 
 - test it on deployment URL, make sure reset time is real
