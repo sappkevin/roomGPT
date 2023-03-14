@@ -19,6 +19,7 @@ import { GenerateResponseData } from "./api/generate";
 import { useSession, signIn } from "next-auth/react";
 import useSWR from "swr";
 import { Rings } from "react-loader-spinner";
+import getRemainingTime from "../utils/getRemainingTime";
 
 // Configuration for the uploader
 const uploader = Uploader({
@@ -26,26 +27,6 @@ const uploader = Uploader({
     ? process.env.NEXT_PUBLIC_UPLOAD_API_KEY
     : "free",
 });
-const options = {
-  maxFileCount: 1,
-  mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-  editor: { images: { crop: false } },
-  styles: {
-    colors: {
-      primary: "#2563EB", // Primary buttons & links
-      error: "#d23f4d", // Error messages
-      shade100: "#fff", // Standard text
-      shade200: "#fffe", // Secondary button text
-      shade300: "#fffd", // Secondary button text (hover)
-      shade400: "#fffc", // Welcome text
-      shade500: "#fff9", // Modal close button
-      shade600: "#fff7", // Border
-      shade700: "#fff2", // Progress indicator background
-      shade800: "#fff1", // File item background
-      shade900: "#ffff", // Various (draggable crop buttons, etc.)
-    },
-  },
-};
 
 const Home: NextPage = () => {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
@@ -61,6 +42,33 @@ const Home: NextPage = () => {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, mutate } = useSWR("/api/remaining", fetcher);
   const { data: session, status } = useSession();
+  const { hours, minutes } = getRemainingTime();
+
+  const options = {
+    maxFileCount: 1,
+    mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
+    editor: { images: { crop: false } },
+    styles: {
+      colors: {
+        primary: "#2563EB", // Primary buttons & links
+        error: "#d23f4d", // Error messages
+        shade100: "#fff", // Standard text
+        shade200: "#fffe", // Secondary button text
+        shade300: "#fffd", // Secondary button text (hover)
+        shade400: "#fffc", // Welcome text
+        shade500: "#fff9", // Modal close button
+        shade600: "#fff7", // Border
+        shade700: "#fff2", // Progress indicator background
+        shade800: "#fff1", // File item background
+        shade900: "#ffff", // Various (draggable crop buttons, etc.)
+      },
+    },
+    onValidate: async (file: File): Promise<undefined | string> => {
+      return data.remainingGenerations === 0
+        ? `No more generations left. Try again in ${hours} hours and ${minutes} minutes.`
+        : undefined;
+    },
+  };
 
   const UploadDropZone = () => (
     <UploadDropzone
@@ -91,7 +99,6 @@ const Home: NextPage = () => {
     });
 
     let response = (await res.json()) as GenerateResponseData;
-    console.log("res from replicate", response);
     if (res.status !== 200) {
       setError(response as any);
     } else {
@@ -124,10 +131,9 @@ const Home: NextPage = () => {
             <span className="font-semibold text-gray-300">
               {data.remainingGenerations} generations
             </span>{" "}
-            left today. Your generation
-            {Number(data.remainingGenerations) > 1 ? "s" : ""} will renew in{" "}
+            left today. Your generations will renew in{" "}
             <span className="font-semibold text-gray-300">
-              {data.hours + 5} hours and {data.minutes} minutes.
+              {hours} hours and {minutes} minutes.
             </span>
           </p>
         )}
@@ -230,7 +236,7 @@ const Home: NextPage = () => {
                   <div className="h-[250px] flex flex-col items-center space-y-6 max-w-[670px] -mt-8">
                     <div className="max-w-xl text-gray-300">
                       Sign in below with Google to create a free account and
-                      redesign your room today. You will be able to do 5
+                      redesign your room today. You will be able to do 3
                       redesigns per day for free.
                     </div>
                     <button

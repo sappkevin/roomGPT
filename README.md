@@ -1,9 +1,10 @@
+
+# [cozyspotai.com](https://cozyspotai.com)
+=======
 ## Todos left for auth
 
 - test it on deployment URL, make sure reset time is real
 - roll it out to prod with instant rollback
-
-# [cozyspotai.com](https://cozyspotai.com)
 
 This project generates new designs of your room with AI.
 
