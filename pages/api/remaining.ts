@@ -23,7 +23,7 @@ export default async function handler(
     (await redis?.get(`@upstash/ratelimit:${identifier!}:${bucket}`)) || 0;
 
   const remainingGenerations =
-    Number(usedGenerations) > 3 ? 0 : 3 - Number(usedGenerations);
+    Number(usedGenerations) > 100 ? 0 : 100 - Number(usedGenerations);
 
   return res.status(200).json({ remainingGenerations });
 }
