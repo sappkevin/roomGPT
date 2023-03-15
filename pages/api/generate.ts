@@ -23,7 +23,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 const ratelimit = redis
   ? new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.fixedWindow(3, "1440 m"),
+      limiter: Ratelimit.fixedWindow(100, "1440 m"),
       analytics: true,
     })
   : undefined;
