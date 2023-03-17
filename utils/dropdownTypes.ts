@@ -41,6 +41,6 @@ export const rooms: roomType[] = [
   "Gaming Room",
   "Kitchen",
   "Children's Room",
-  "Garage,
+  "Garage",
   "Basement",
 ];
