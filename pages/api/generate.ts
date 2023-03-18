@@ -65,7 +65,7 @@ export default async function handler(
   //Decide on which prompt to use based on room type
   let replicatePrompt = "";
   let replicateMainPrompt = "";
-  const genericprompt = "a " + theme.toLowerCase() + " " + room.toLowerCase()
+  let genericprompt = `a [${theme.toLowerCase()}] [${room.toLowerCase()}]`
   
   if (room === "Gaming Room") {
   //  Gaming Room
@@ -134,9 +134,9 @@ export default async function handler(
       input: {
         image: imageUrl,
         prompt:
-          room === replicatePrompt || genericprompt,
+          room === `${replicatePrompt}` || `${genericprompt}`,
         a_prompt:
-          replicateMainPrompt,
+          '${replicateMainPrompt}',
         n_prompt:
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
