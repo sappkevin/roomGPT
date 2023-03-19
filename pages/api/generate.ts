@@ -124,6 +124,10 @@ export default async function handler(
   if (!replicatePrompt){
     replicatePrompt = genericprompt
   }
+
+  if (!replicateMainPrompt) {
+    replicateMainPrompt = "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning"
+  }
   
   // POST request to Replicate to start the image restoration generation process
   let startResponse = await fetch("httpapi.replicate.s://com/v1/predictions", {
