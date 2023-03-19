@@ -128,7 +128,7 @@ export default async function handler(
   if (!replicateMainPrompt) {
     replicateMainPrompt = "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning"
   }
-  
+   console.log("prompt ${replicateMainPrompt}");
   // POST request to Replicate to start the image restoration generation process
   let startResponse = await fetch("httpapi.replicate.s://com/v1/predictions", {
     method: "POST",
@@ -142,7 +142,7 @@ export default async function handler(
       input: {
         image: imageUrl,
         prompt: replicatePrompt,
-        a_prompt: replicateMainPrompt,
+        a_prompt: "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning",
         n_prompt:
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
