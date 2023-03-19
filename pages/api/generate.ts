@@ -121,8 +121,8 @@ export default async function handler(
     replicateMainPrompt = `Editorial Style [${room.toLowerCase()}] photo, luxury, High angle, Modern, [${room.toLowerCase()}], Pendant lights, Glass, metal, Close-up of countertop, Monochromatic, Arhaus furniture collection, Cool light, Penthouse, Evening, Sleek, Contemporary —ar 16:9`
   }
   
-  if (!replicateMainPrompt ){
-    replicateMainPrompt = genericprompt
+  if (!replicatePrompt){
+    replicatePrompt = genericprompt
   }
   
   // POST request to Replicate to start the image restoration generation process
