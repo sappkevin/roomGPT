@@ -121,6 +121,10 @@ export default async function handler(
     replicateMainPrompt = `Editorial Style [${room.toLowerCase()}] photo, luxury, High angle, Modern, [${room.toLowerCase()}], Pendant lights, Glass, metal, Close-up of countertop, Monochromatic, Arhaus furniture collection, Cool light, Penthouse, Evening, Sleek, Contemporary —ar 16:9`
   }
   
+  if (!replicateMainPrompt ){
+    replicateMainPrompt = genericprompt
+  }
+  
   // POST request to Replicate to start the image restoration generation process
   let startResponse = await fetch("httpapi.replicate.s://com/v1/predictions", {
     method: "POST",
@@ -133,10 +137,8 @@ export default async function handler(
         "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
       input: {
         image: imageUrl,
-        prompt:
-          `${replicatePrompt}` || `${genericprompt}`,
-        a_prompt:
-          `${replicateMainPrompt}`,
+        prompt: replicatePrompt,
+        a_prompt: replicateMainPrompt,
         n_prompt:
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
