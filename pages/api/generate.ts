@@ -63,8 +63,8 @@ export default async function handler(
 
   const { imageUrl, theme, room } = req.body;
   //Decide on which prompt to use based on room type
-  let replicatePrompt = "";
-  let replicateMainPrompt = "";
+  let replicatePrompt;
+  let replicateMainPrompt;
   let genericprompt = `a [${theme.toLowerCase()}] [${room.toLowerCase()}]`
   
   if (room === "Gaming Room") {
@@ -134,9 +134,9 @@ export default async function handler(
       input: {
         image: imageUrl,
         prompt:
-          replicatePrompt || genericprompt,
+          `${replicatePrompt}` || `${genericprompt}`,
         a_prompt:
-          replicateMainPrompt,
+          `${replicateMainPrompt}`,
         n_prompt:
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
@@ -150,6 +150,23 @@ export default async function handler(
   const roomId = jsonStartResponse.id;
 
   // GET request to get the status of the image restoration process & return the result when it's ready
+  /*
+  while (
+      prediction.status !== "succeeded" &&
+      prediction.status !== "failed"
+    ) {
+      await sleep(1000);
+      const response = await fetch("/api/predictions/" + prediction.id);
+      prediction = await response.json();
+      if (response.status !== 200) {
+        setError(prediction.detail);
+        return;
+      }
+      console.log({prediction})
+      setPrediction(prediction);
+    }
+  };*/
+  //
   let generatedImage: string | null = null;
   while (!generatedImage) {
     // Loop in 1s intervals until the alt text is ready
