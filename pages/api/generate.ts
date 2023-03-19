@@ -121,7 +121,7 @@ export default async function handler(
     replicateMainPrompt = `Editorial Style [${room.toLowerCase()}] photo, luxury, High angle, Modern, [${room.toLowerCase()}], Pendant lights, Glass, metal, Close-up of countertop, Monochromatic, Arhaus furniture collection, Cool light, Penthouse, Evening, Sleek, Contemporary —ar 16:9`
   }
   
-  if (!replicatePrompt){
+  if (!replicatePrompt) {
     replicatePrompt = genericprompt
   }
 
