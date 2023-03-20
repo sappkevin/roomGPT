@@ -128,8 +128,31 @@ export default async function handler(
   if (!replicateMainPrompt) {
     replicateMainPrompt = "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning"
   }
-   console.log("prompt ${replicateMainPrompt}");
   // POST request to Replicate to start the image restoration generation process
+  let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + process.env.REPLICATE_API_KEY,
+    },
+    body: JSON.stringify({
+      version:
+        "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
+      input: {
+        image: imageUrl,
+        prompt:
+          room === "Gaming Room"
+            ? "a room for gaming with gaming computers, gaming consoles, and gaming chairs"
+            : `a ${theme.toLowerCase()} ${room.toLowerCase()}`,
+        a_prompt:
+          "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning",
+        n_prompt:
+          "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
+      },
+    }),
+  });
+  // POST request to Replicate to start the image restoration generation process
+  /*
   let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
     headers: {
@@ -147,7 +170,7 @@ export default async function handler(
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
     }),
-  });
+  });*/
 
   let jsonStartResponse = await startResponse.json();
 
