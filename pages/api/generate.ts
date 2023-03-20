@@ -129,6 +129,7 @@ export default async function handler(
     replicateMainPrompt = "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning"
   }
   // POST request to Replicate to start the image restoration generation process
+  /*
   let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
     headers: {
@@ -150,10 +151,9 @@ export default async function handler(
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
     }),
-  });
+  });*/
   // POST request to Replicate to start the image restoration generation process
-  /*
-  let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
+ let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -165,12 +165,12 @@ export default async function handler(
       input: {
         image: imageUrl,
         prompt: replicatePrompt,
-        a_prompt: "best quality, extremely detailed, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning",
+        a_prompt: replicateMainPrompt,
         n_prompt:
           "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       },
     }),
-  });*/
+  });
 
   let jsonStartResponse = await startResponse.json();
 
