@@ -196,12 +196,11 @@ export default async function handler(
     }
   };*/
   //
+  // GET request to get the status of the image restoration process & return the result when it's ready
   let generatedImage: string | null = null;
-  
   while (!generatedImage) {
     // Loop in 1s intervals until the alt text is ready
     console.log("polling for result...");
-    await new Promise(r => setTimeout(r, 1000));
     let finalResponse = await fetch(endpointUrl, {
       method: "GET",
       headers: {
@@ -210,13 +209,13 @@ export default async function handler(
       },
     });
     let jsonFinalResponse = await finalResponse.json();
-    if (finalResponse.status === 200) {
+
+    if (jsonFinalResponse.status === "succeeded") {
       generatedImage = jsonFinalResponse.output[1] as string;
-      break;
-    } else if (finalResponse.status !== 200 ) {
+    } else if (jsonFinalResponse.status === "failed") {
       break;
     } else {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
   res.status(200).json(
