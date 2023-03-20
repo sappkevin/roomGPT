@@ -197,9 +197,13 @@ export default async function handler(
   };*/
   //
   let generatedImage: string | null = null;
-  while (!generatedImage) {
+  while (
+    jsonFinalResponse.status !== "succeeded" &&
+    jsonFinalResponse.status !== "failed"
+  ) {
     // Loop in 1s intervals until the alt text is ready
     console.log("polling for result...");
+    await sleep(1000);
     let finalResponse = await fetch(endpointUrl, {
       method: "GET",
       headers: {
@@ -209,9 +213,9 @@ export default async function handler(
     });
     let jsonFinalResponse = await finalResponse.json();
 
-    if (jsonFinalResponse.status === "succeeded") {
+    if (finalResponse.status === 200) {
       generatedImage = jsonFinalResponse.output[1] as string;
-    } else if (jsonFinalResponse.status === "failed") {
+    } else if (finalResponse.status !== 200 ) {
       break;
     } else {
       await new Promise((resolve) => setTimeout(resolve, 1000));
