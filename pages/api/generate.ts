@@ -130,7 +130,7 @@ export default async function handler(
   }
    console.log("prompt ${replicateMainPrompt}");
   // POST request to Replicate to start the image restoration generation process
-  let startResponse = await fetch("httpapi.replicate.s://com/v1/predictions", {
+  let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
