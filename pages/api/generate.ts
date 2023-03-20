@@ -197,29 +197,11 @@ export default async function handler(
   };*/
   //
   let generatedImage: string | null = null;
-  let finalResponse = await fetch(endpointUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Token " + process.env.REPLICATE_API_KEY,
-      },
-    });
-  let jsonFinalResponse = await finalResponse.json();
-  await new Promise(r => setTimeout(r, 1000));
-  if (finalResponse.status === 200) {
-      generatedImage = jsonFinalResponse.output[1] as string;
-  } 
-  while (
-    jsonFinalResponse.status !== "succeeded" &&
-    jsonFinalResponse.status !== "failed"
-  ) {
+  
+  while (!generatedImage) {
     // Loop in 1s intervals until the alt text is ready
     console.log("polling for result...");
     await new Promise(r => setTimeout(r, 1000));
-    if (finalResponse.status === 200) {
-      generatedImage = jsonFinalResponse.output[1] as string;
-      break;
-    } 
     let finalResponse = await fetch(endpointUrl, {
       method: "GET",
       headers: {
@@ -228,14 +210,13 @@ export default async function handler(
       },
     });
     let jsonFinalResponse = await finalResponse.json();
-
     if (finalResponse.status === 200) {
       generatedImage = jsonFinalResponse.output[1] as string;
       break;
     } else if (finalResponse.status !== 200 ) {
       break;
     } else {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
   res.status(200).json(
