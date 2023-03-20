@@ -4,7 +4,10 @@ import requestIp from "request-ip";
 import redis from "../../utils/redis";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export type GenerateResponseData = {
   original: string | null;
