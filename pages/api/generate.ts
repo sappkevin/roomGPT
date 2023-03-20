@@ -5,10 +5,6 @@ import redis from "../../utils/redis";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export type GenerateResponseData = {
   original: string | null;
   generated: string | null;
@@ -209,7 +205,7 @@ export default async function handler(
       },
     });
   let jsonFinalResponse = await finalResponse.json();
-  await sleep(1000);
+  await new Promise(r => setTimeout(r, 1000));
   if (finalResponse.status === 200) {
       generatedImage = jsonFinalResponse.output[1] as string;
   } 
@@ -219,7 +215,7 @@ export default async function handler(
   ) {
     // Loop in 1s intervals until the alt text is ready
     console.log("polling for result...");
-    await sleep(1000);
+    await new Promise(r => setTimeout(r, 1000));
     if (finalResponse.status === 200) {
       generatedImage = jsonFinalResponse.output[1] as string;
       break;
